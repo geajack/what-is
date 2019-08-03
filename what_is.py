@@ -11,7 +11,7 @@ class CantFindThing(Exception):
 def fetch_wikipedia_html(title):
     URL_TEMPLATE = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&redirects=&titles={title}"
     url = URL_TEMPLATE.format(title=title)
-    api_response = get(url).json()
+    api_response = get(url, timeout=10).json()
     pages = api_response["query"]["pages"]
     page_id = list(pages.keys())[0]
     if page_id != "-1":
