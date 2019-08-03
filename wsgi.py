@@ -8,6 +8,10 @@ app = Flask("What Is")
 def handle_cant_find(exception):
     return f"I don't know what \"{exception.thing}\" is.", 404
 
+@app.errorhandler(Exception)
+def handle_exception(exception):
+    return "Uh-oh, there was a problem.", 500
+
 @app.route("/<thing>", methods=["GET"])
 def query(thing):
     return what_is(thing)
